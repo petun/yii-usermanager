@@ -1,9 +1,15 @@
 <?
 class UserModule extends CWebModule {
 
-	public $defaultLayout = 'application.views.layouts.main';
+	public $defaultLayout = 'application.views.layouts.column2';
 
 	public $defaultController = 'user';
+
+	public $profileModel;
+
+	public $profileForm;
+
+	public $profileView;
 
 
 	public function init() {

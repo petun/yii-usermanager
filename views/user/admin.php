@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
 	array('label'=>'Create User', 'url'=>array('create')),
 );
 
@@ -47,15 +46,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
+		'login',
 		'name',
 		/*'salt',
 		'password',
 		'passwordStrategy',
 		'requiresNewPassword',
-		*/
 		'lastLoginAt',
 		'lastActiveAt',
-		'status',
+		'status',*/
 
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

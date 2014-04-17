@@ -15,24 +15,20 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-    <p class="help-block">Fields with <span class="required">*</span> are required.</p>
-
     <?php echo $form->errorSummary($model); ?>
 
             <?php echo $form->textFieldControlGroup($model,'name',array('span'=>5,'maxlength'=>255)); ?>
-            <?php echo $form->passwordFieldControlGroup($model,'password',array('span'=>5,'maxlength'=>255)); ?>
+			<?php echo $form->textFieldControlGroup($model,'login',array('span'=>5,'maxlength'=>255)); ?>
+			<? if ($model->isNewRecord) {?>
+				<?php echo $form->passwordFieldControlGroup($model,'password',array('span'=>5,'maxlength'=>255)); ?>
+			<? }?>
 
-			<? if  (!$model->isNewRecord) { ?>
-			<?php echo $form->textFieldControlGroup($model,'salt',array('span'=>5,'maxlength'=>255)); ?>
-            <?php echo $form->textFieldControlGroup($model,'passwordStrategy',array('span'=>5,'maxlength'=>255)); ?>
-            <?php echo $form->textFieldControlGroup($model,'requiresNewPassword',array('span'=>5)); ?>
-            <?php echo $form->textFieldControlGroup($model,'lastLoginAt',array('span'=>5)); ?>
-            <?php echo $form->textFieldControlGroup($model,'lastActiveAt',array('span'=>5)); ?>
-            <?php echo $form->textFieldControlGroup($model,'status',array('span'=>5)); ?>
+			<? if ($profileForm) {?>
+				<? $this->renderPartial($profileForm, array('model'=>$model,'form'=>$form)); ?>
 			<? } ?>
 
         <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array(
+        <?php echo TbHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>
