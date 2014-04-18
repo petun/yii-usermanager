@@ -33,6 +33,6 @@ $this->menu=array(
 	),
 )); ?>
 
-<? if ($profileView) {
+<? if (!empty($profileView)) {
 	$this->renderPartial($profileView, array('model'=>$model));
 }?>

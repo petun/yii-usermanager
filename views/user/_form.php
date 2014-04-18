@@ -23,7 +23,7 @@
 				<?php echo $form->passwordFieldControlGroup($model,'password',array('span'=>5,'maxlength'=>255)); ?>
 			<? }?>
 
-			<? if ($profileForm) {?>
+			<? if (!empty($profileForm)) {?>
 				<? $this->renderPartial($profileForm, array('model'=>$model,'form'=>$form)); ?>
 			<? } ?>
 
