@@ -5,15 +5,15 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('admin'),
-	'Create',
+	Yii::t('UserModule.main', 'Manage Users') =>array('admin'),
+	Yii::t('UserModule.main', 'Create User')
 );
 
 $this->menu=array(
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>Yii::t('UserModule.main','Manage Users'), 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create User</h1>
+<h1><?=Yii::t('UserModule.main', 'Create User');?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

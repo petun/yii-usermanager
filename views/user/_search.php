@@ -26,7 +26,7 @@
                     <?php echo $form->textFieldControlGroup($model,'status',array('span'=>5)); ?>
 
         <div class="form-actions">
-        <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>
+        <?php echo TbHtml::submitButton(Yii::t('UserModule.main', 'Search'),  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>
     </div>
 
     <?php $this->endWidget(); ?>

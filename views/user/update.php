@@ -5,16 +5,16 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('admin'),
+	Yii::t('UserModule.main','Manage Users') => array('admin'),
 	$model->title=>array('view','id'=>$model->id),
-	'Update',
+	Yii::t('UserModule.main', 'Updating User Data'),
 );
 
 $this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
-	array('label'=>Yii::t('app','Reset password'), 'url'=>array('reset','id'=>$model->id)),
+	array('label'=>Yii::t('UserModule.main','Create User'), 'url'=>array('create')),
+	array('label'=>Yii::t('UserModule.main', 'Delete User'), 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>Yii::t('UserModule.main','Manage Users'), 'url'=>array('admin')),
+	array('label'=>Yii::t('UserModule.main','Reset password'), 'url'=>array('reset','id'=>$model->id)),
 );
 ?>
 

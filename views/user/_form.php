@@ -28,7 +28,7 @@
 			<? } ?>
 
         <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),array(
+        <?php echo TbHtml::submitButton($model->isNewRecord ? Yii::t('UserModule.main','Add User') : Yii::t('UserModule.main','Save'),array(
 		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
 		)); ?>

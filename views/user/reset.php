@@ -5,9 +5,9 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('admin'),
+	Yii::t('UserModule.main','Manage Users') => array('admin'),
 	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	Yii::t('UserModule.main','Reset password'),
 );
 
 $this->menu=array(
@@ -17,7 +17,7 @@ $this->menu=array(
 );
 ?>
 
-<h1><? echo Yii::t('app','Reset password');?></h1>
+<h1><? echo Yii::t('UserModule.main','Reset password');?></h1>
 <div class="form">
 
 	<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -34,7 +34,7 @@ $this->menu=array(
 	<?php echo $form->passwordFieldControlGroup($model,'password',array('span'=>5,'maxlength'=>255)); ?>
 
 	<div class="form-actions">
-		<?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array(
+		<?php echo TbHtml::submitButton(Yii::t('UserModule.main','Reset'),array(
 				'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
 				'size'=>TbHtml::BUTTON_SIZE_LARGE,
 			)); ?>
