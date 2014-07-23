@@ -1,6 +1,7 @@
 <?php
 /* @var $this UserController */
 /* @var $model User */
+/* @var $profileAttr array */
 ?>
 
 <?php
@@ -24,15 +25,11 @@ $this->menu=array(
         'class' => 'table table-striped table-condensed table-hover',
     ),
     'data'=>$model,
-    'attributes'=>array(
+    'attributes'=>array_merge(array(
 		'id',
 	    'login',
 		'name',
 		'lastLoginAt',
 		'lastActiveAt',
-	),
+	), $profileAttr),
 )); ?>
-
-<? if (!empty($profileView)) {
-	$this->renderPartial($profileView, array('model'=>$model));
-}?>

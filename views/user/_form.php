@@ -16,6 +16,7 @@
 )); ?>
 
     <?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model->profile); ?>
 
             <?php echo $form->textFieldControlGroup($model,'name',array('span'=>5,'maxlength'=>255)); ?>
 			<?php echo $form->textFieldControlGroup($model,'login',array('span'=>5,'maxlength'=>255)); ?>

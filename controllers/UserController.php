@@ -27,11 +27,17 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$profileView = Yii::app()->controller->module->profileView;
+		$model = $this->loadModel($id);
+		$profileAttr = array();
+		if (!empty($model->profile)) {
+			if (method_exists($model->profile,'detailData')) {
+				$profileAttr = $model->profile->detailData();
+			}
+		}
 
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-			'profileView'=>$profileView,
+			'model'=> $model,
+			'profileAttr' => $profileAttr,
 		));
 	}
 
@@ -42,20 +48,46 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
+		$model->profile = new Profile();
+
+		$profileForm = Yii::app()->controller->module->profileForm;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['User'])) {
-			$model->attributes=$_POST['User'];
+			$model->attributes = $_POST['User'];
+			$transaction = Yii::app()->db->beginTransaction();
 			if ($model->save()) {
-				$this->redirect(array('view','id'=>$model->id));
+
+				if (isset($_POST['Profile'])) {
+					$model->profile->attributes = $_POST['Profile'];
+				}
+
+				$model->profile->user_id = $model->id;
+				if ($model->profile->save()) {
+					$transaction->commit();
+
+					$this->onUserCreate = Yii::app()->controller->module->eventOnUserCreate;
+
+					$event = new CEvent($model);
+					$this->onUserCreate($event);
+
+					$this->redirect(array('view','id'=>$model->id));
+				} else {
+					$transaction->rollback();
+				}
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'profileForm'=>$profileForm,
 		));
+	}
+
+	public function onUserCreate($event) {
+		$this->raiseEvent('onUserCreate', $event);
 	}
 
 	/**
@@ -85,10 +117,6 @@ class UserController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
-
-
-
-
 
 		$this->render('update',array(
 			'model'=>$model,

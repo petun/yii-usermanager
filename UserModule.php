@@ -11,6 +11,8 @@ class UserModule extends CWebModule {
 
 	public $profileView;
 
+	public $eventOnUserCreate;
+
 
 	public function init() {
 
