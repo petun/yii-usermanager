@@ -48,7 +48,7 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-		$model->profile = new Profile();
+		$model->profile = new Profile('newUser');
 
 		$profileForm = Yii::app()->controller->module->profileForm;
 
@@ -76,6 +76,9 @@ class UserController extends Controller
 					$this->redirect(array('view','id'=>$model->id));
 				} else {
 					$transaction->rollback();
+					// т.к. пользователь сохранен - нужно сбросить все руками
+					$model->isNewRecord = true;
+					$model->password = '';
 				}
 			}
 		}
@@ -103,18 +106,17 @@ class UserController extends Controller
 		// $this->performAjaxValidation($model);
 
 		$profileForm = Yii::app()->controller->module->profileForm;
-		$profileModel = Yii::app()->controller->module->profileModel;
 
 		if (isset($_POST['User'])) {
 			$model->attributes=$_POST['User'];
 			if ($model->save()) {
 				// save profile if exist
-				if (isset($_POST[$profileModel])) {
-					$model->profile->attributes = $_POST[$profileModel];
-					$model->profile->save();
+				if (isset($_POST['Profile'])) {
+					$model->profile->attributes = $_POST['Profile'];
+					if ($model->profile->save()) {
+						$this->redirect(array('view','id'=>$model->id));
+					}
 				}
-
-				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
 
